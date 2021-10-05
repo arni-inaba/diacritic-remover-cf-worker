@@ -15,7 +15,7 @@ async function serve(request) {
   <body>
     <form method="POST" enctype="multipart/form-data"> 
       <input type="file" multiple name="files[]" />
-      <input type="submit" />
+      <input type="submit" value="submit" />
     </form>
   </body>
 </html>
