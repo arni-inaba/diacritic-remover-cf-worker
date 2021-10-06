@@ -3,7 +3,6 @@ addEventListener('fetch', event => event.respondWith(serve(event.request)))
 async function serve(request) {
   try {
     const url = new URL(request.url);
-    const action = request.method + ' ' + url.pathname;
     if (request.method === 'GET') {
       const html = `
 <!DOCTYPE html>
@@ -41,6 +40,7 @@ async function serve(request) {
     for (const headerval of incomingContentDispositionHeader.values) {
         if (headerval.startsWith('filename')) {
             filename = headerval.split('=')[1].replace(/['"]+/g, '')
+            break
         }
     }
 
