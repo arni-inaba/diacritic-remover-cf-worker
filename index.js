@@ -36,17 +36,17 @@ async function serve(request) {
     const [part] = parts;
     const type = part.headers.find(h => h.name === 'Content-Type')?.values[0] || 'application/octet-stream';
     let filename = '';
-    const incomingContentDispositionHeader = part.headers.find(h => h.name === 'Content-Disposition')
+    const incomingContentDispositionHeader = part.headers.find(h => h.name === 'Content-Disposition');
     for (const headerval of incomingContentDispositionHeader.values) {
         if (headerval.startsWith('filename')) {
-            filename = headerval.split('=')[1].replace(/['"]+/g, '')
-            break
+            filename = headerval.split('=')[1].replace(/['"]+/g, '');
+            break;
         }
     }
 
 
     const filenameParts = filename.split('.');
-    const fixedFilename = filenameParts[0] + '-fixed.' + filenameParts[1]
+    const fixedFilename = filenameParts[0] + '-fixed.' + filenameParts[1];
     const blob = uint8Arrray.slice(part.index, part.index + part.length);
     let utf8decoder = new TextDecoder("utf-8"); // default 'utf-8' or 'utf8'
     const blobString = utf8decoder.decode(blob);
